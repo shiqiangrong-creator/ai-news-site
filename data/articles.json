@@ -1,0 +1,50 @@
+{
+  "updatedAt": "2024-04-11T12:00:00.000Z",
+  "articles": [
+    {
+      "id": "qb-sample-1",
+      "title": "OpenAI 发布 GPT-5：AGI 发展进入新阶段",
+      "link": "https://www.qbitai.com/example",
+      "pubDate": "2024-04-11T10:30:00.000Z",
+      "source": "量子位",
+      "summary": "OpenAI 在今日凌晨发布了最新一代 GPT-5 模型，该模型在多模态理解、推理能力和 Agent 能力方面都有显著提升...",
+      "aiSummary": "OpenAI 发布 GPT-5，新模型在多模态理解和 Agent 能力上实现突破，性能大幅提升，被视为迈向 AGI 的重要一步。"
+    },
+    {
+      "id": "jqzx-sample-1",
+      "title": "Meta 开源 LLaMA 3：最强开源大语言模型诞生",
+      "link": "https://www.jiqizhixin.com/example",
+      "pubDate": "2024-04-11T09:15:00.000Z",
+      "source": "机器之心",
+      "summary": "Meta 正式开源 LLaMA 3 模型，包含 8B 和 70B 两个版本，在多项基准测试中超越了 GPT-4，成为当前最强的开源大语言模型...",
+      "aiSummary": "Meta 开源 LLaMA 3 系列模型，8B 和 70B 版本性能超越 GPT-4，刷新开源模型纪录，对学术研究和商业应用意义重大。"
+    },
+    {
+      "id": "qb-sample-2",
+      "title": "英伟达 H200 全面量产：AI 算力再创新高",
+      "link": "https://www.qbitai.com/example2",
+      "pubDate": "2024-04-10T18:00:00.000Z",
+      "source": "量子位",
+      "summary": "英伟达官方宣布 H200 GPU 全面量产，相比 H100 在大模型训练方面提升 60%~90%，数据中心订单已排到 2025 年...",
+      "aiSummary": "英伟达 H200 GPU 量产，性能提升最高 90%，算力需求持续火爆，订单排期已至 2025 年，AI 算力竞争进入新阶段。"
+    },
+    {
+      "id": "jqzx-sample-2",
+      "title": "Google DeepMind 发布 AlphaCode 3：编程能力再突破",
+      "link": "https://www.jiqizhixin.com/example2",
+      "pubDate": "2024-04-10T14:30:00.000Z",
+      "source": "机器之心",
+      "summary": "Google DeepMind 发布 AlphaCode 3，在编程竞赛中达到国际大师水平，能够独立完成复杂的算法实现和代码优化...",
+      "aiSummary": "AlphaCode 3 发布，编程能力达国际大师水平，可独立完成复杂算法实现，AI 编程助手进入实用化阶段。"
+    },
+    {
+      "id": "qb-sample-3",
+      "title": "国内首个千亿参数多模态大模型「紫东太初2.0」发布",
+      "link": "https://www.qbitai.com/example3",
+      "pubDate": "2024-04-10T10:00:00.000Z",
+      "source": "量子位",
+      "summary": "中科院自动化所与华为联合发布「紫东太初2.0」，这是国内首个千亿参数的多模态大模型，支持文本、图像、视频的统一理解...",
+      "aiSummary": "中科院与华为发布「紫东太初2.0」，国内首个千亿参数多模态大模型，实现文本、图像、视频统一理解，填补领域空白。"
+    }
+  ]
+}
