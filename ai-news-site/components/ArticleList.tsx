@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { Article } from '@/lib/rss';
 import ArticleCard from './ArticleCard';
 import FilterBar from './FilterBar';
@@ -18,12 +18,15 @@ export default function ArticleList({ initialArticles }: ArticleListProps) {
   const [showFavorites, setShowFavorites] = useState(false);
   const { favorites, toggleFavorite, isFavorited, clearFavorites } = useFavorites();
 
-  // 搜索功能
-  const searchEngine = new ArticleSearch();
-  searchEngine.addArticles(articles);
+  // 使用 useMemo 优化搜索
+  const searchEngine = useMemo(() => {
+    const engine = new ArticleSearch();
+    engine.addArticles(articles);
+    return engine;
+  }, [articles]);
 
   // 根据筛选条件获取文章
-  const getFilteredArticles = () => {
+  const filteredArticles = useMemo(() => {
     let filtered = articles;
 
     // 来源筛选
@@ -39,9 +42,9 @@ export default function ArticleList({ initialArticles }: ArticleListProps) {
     }
 
     return filtered;
-  };
+  }, [articles, selectedSource, searchQuery, searchEngine]);
 
-  const displayedArticles = showFavorites ? favorites : getFilteredArticles();
+  const displayedArticles = showFavorites ? favorites : filteredArticles;
 
   return (
     <div className="container">
@@ -50,7 +53,7 @@ export default function ArticleList({ initialArticles }: ArticleListProps) {
           <span className="title-icon">🤖</span>
           AI 资讯聚合
         </h1>
-        <p className="site-subtitle">汇聚量子位、机器之心等优质AI资讯源</p>
+        <p className="site-subtitle">汇聚量子位、AIbase、InfoQ等优质AI资讯源</p>
       </header>
 
       <FilterBar
@@ -67,7 +70,7 @@ export default function ArticleList({ initialArticles }: ArticleListProps) {
             onClick={() => setShowFavorites(false)}
             className={`tab ${!showFavorites ? 'active' : ''}`}
           >
-            全部文章 ({getFilteredArticles().length})
+            全部文章 ({filteredArticles.length})
           </button>
           <button
             onClick={() => setShowFavorites(true)}
@@ -114,8 +117,8 @@ export default function ArticleList({ initialArticles }: ArticleListProps) {
       )}
 
       <footer className="footer">
-        <p>数据来源：量子位 · 机器之心 | 由 DeepSeek AI 提供摘要支持</p>
-        <p>最后更新：{new Date().toLocaleString('zh-CN')}</p>
+        <p>数据来源：量子位 · AIbase · InfoQ AI · OpenAI · DeepMind · TechCrunch · MIT Tech Review</p>
+        <p>由 DeepSeek AI 提供摘要支持 | 最后更新：{new Date().toLocaleString('zh-CN')}</p>
       </footer>
     </div>
   );
