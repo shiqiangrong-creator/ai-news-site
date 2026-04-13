@@ -1,0 +1,42 @@
+name: Update AI News
+
+on:
+  schedule:
+    # 每6小时运行一次 (UTC时间: 0, 6, 12, 18 点)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./ai-news-site
+        run: npm ci
+
+      - name: Fetch and update news
+        working-directory: ./ai-news-site
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          # 运行数据更新脚本
+          node scripts/fetch-news.js || true
+        continue-on-error: true
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "自动更新AI资讯 - $(date '+%Y-%m-%d %H:%M')"
+          git push
+        continue-on-error: true
