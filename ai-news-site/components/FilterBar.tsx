@@ -30,7 +30,7 @@ export default function FilterBar({
     return acc;
   }, {} as Record<string, number>);
 
-  const sources = ['全部', '量子位', '机器之心'];
+  const sources = ['全部', ...Object.keys(sourceCounts).sort()];
 
   if (!mounted) {
     return null;
@@ -66,7 +66,7 @@ export default function FilterBar({
             <button
               key={source}
               onClick={() => onSourceChange(source)}
-              className={`source-btn ${selectedSource === source ? 'active' : ''} source-${source === '量子位' ? 'qb' : source === '机器之心' ? 'jqzx' : 'all'}`}
+              className={`source-btn ${selectedSource === source ? 'active' : ''}`}
             >
               {source}
               <span className="count">({count})</span>
