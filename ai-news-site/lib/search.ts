@@ -12,10 +12,11 @@ export interface SearchableArticle {
 }
 
 export class ArticleSearch {
-  private index: FlexSearch.Document<SearchableArticle, string[]>;
+  private index: FlexSearch.Document<SearchableArticle>;
+  private articles: Map<string, SearchableArticle> = new Map();
 
   constructor() {
-    this.index = new FlexSearch.Document<SearchableArticle, string[]>({
+    this.index = new FlexSearch.Document<SearchableArticle>({
       document: {
         id: 'id',
         index: ['title', 'summary', 'aiSummary', 'content', 'source'],
@@ -29,6 +30,7 @@ export class ArticleSearch {
   addArticles(articles: SearchableArticle[]) {
     articles.forEach(article => {
       this.index.add(article);
+      this.articles.set(article.id, article);
     });
   }
 
@@ -37,18 +39,15 @@ export class ArticleSearch {
       return [];
     }
 
-    const results = this.index.search(query, {
-      limit,
-      enrich: true,
-    });
+    const results = this.index.search(query, { limit });
 
     // 合并所有搜索结果并去重
     const seen = new Set<string>();
     const merged: SearchableArticle[] = [];
 
     for (const fieldResult of results) {
-      for (const item of fieldResult.result) {
-        const doc = item.doc as SearchableArticle;
+      for (const id of fieldResult.result) {
+        const doc = this.articles.get(id as string);
         if (doc && !seen.has(doc.id)) {
           seen.add(doc.id);
           merged.push(doc);
@@ -60,7 +59,7 @@ export class ArticleSearch {
   }
 
   clear() {
-    this.index = new FlexSearch.Document<SearchableArticle, string[]>({
+    this.index = new FlexSearch.Document<SearchableArticle>({
       document: {
         id: 'id',
         index: ['title', 'summary', 'aiSummary', 'content', 'source'],
@@ -69,5 +68,6 @@ export class ArticleSearch {
       tokenize: 'forward',
       resolution: 9,
     });
+    this.articles.clear();
   }
 }
