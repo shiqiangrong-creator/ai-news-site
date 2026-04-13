@@ -40,7 +40,7 @@ export default function ArticleCard({ article, isFavorited, onToggleFavorite }: 
   return (
     <article className="article-card">
       <div className="article-header">
-        <span className={`source-tag source-${article.source === '量子位' ? 'qb' : 'jqzx'}`}>
+        <span className="source-tag">
           {article.source}
         </span>
         <span className="article-time">{formatDate(article.pubDate)}</span>

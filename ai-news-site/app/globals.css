@@ -107,6 +107,7 @@ body {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  min-height: 40px;
 }
 
 .source-btn {
@@ -220,14 +221,7 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   color: white;
-}
-
-.source-qb {
-  background: var(--qb-color);
-}
-
-.source-jqzx {
-  background: var(--jqzx-color);
+  background: var(--primary);
 }
 
 .article-time {
