@@ -19,7 +19,7 @@ export class ArticleSearch {
       document: {
         id: 'id',
         index: ['title', 'summary', 'aiSummary', 'content', 'source'],
-        store: true,
+        store: ['title', 'summary', 'aiSummary', 'content', 'source'],
       },
       tokenize: 'forward',
       resolution: 9,
@@ -64,7 +64,7 @@ export class ArticleSearch {
       document: {
         id: 'id',
         index: ['title', 'summary', 'aiSummary', 'content', 'source'],
-        store: true,
+        store: ['title', 'summary', 'aiSummary', 'content', 'source'],
       },
       tokenize: 'forward',
       resolution: 9,
